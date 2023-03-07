@@ -1,13 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
-import Test from './Test'
-import Mutate from './Mutate';
-import TestCallBack from './testCallBack';
-import reportWebVitals from './reportWebVitals';
-import UseState from "./useState"
-import UseSetState1 from './useSetState';
+import Test from './ahooks/Test'
+import Mutate from './ahooks/Mutate';
+import TestCallBack from './react/testCallBack';
+import UseState from "./react/useState"
+import UseSetState1 from './ahooks/useSetState';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -20,4 +18,3 @@ root.render(
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
