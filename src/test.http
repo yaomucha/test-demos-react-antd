@@ -1,0 +1,9 @@
+POST /mock/2272042/api/base/login HTTP/1.1
+Host: 127.0.0.1:4523
+User-Agent: apifox/1.0.0 (https://www.apifox.cn)
+Content-Type: application/json
+
+{
+    "email":"123",
+    "password":"123"
+}
