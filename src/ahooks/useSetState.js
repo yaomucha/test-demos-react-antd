@@ -1,22 +1,26 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useSetState } from 'ahooks';
 
-// interface State {
-//   hello: string;
-//   count: number;
-//   [key: string]: any;
-// }
 
 export default function useSetState1() {
-  const [state, setState] = useSetState(0);
+  const [state, setState] = useSetState(0);   //源码里把setState用useCallback封装了，是为了组件传参做优化
+
+
+  // const show = () => {    //React.memo与useCallback要配合使用
+  //   console.log("show")
+  // }
+
+
+  const show = useCallback(() => {
+    console.log("show")
+  }, [])
+
 
   return (
     <div>
       <pre>{JSON.stringify(state, null, 2)}</pre>
       <p>
-        <button type="button" onClick={() => setState({ hello: 'world' })}>
-          set hello
-        </button>
+        <Com1 setState={setState} />
         <button type="button" onClick={() => setState({ foo: 'bar' })} style={{ margin: '0 8px' }}>
           set foo
         </button>
@@ -29,19 +33,19 @@ export default function useSetState1() {
 };
 
 function JUseState(initialState) {
-    const [state, setState] = useState(initialState);
+  const [state, setState] = useState(initialState);
 
-    function setValue(newObj) {
-        setState(Object.assign({}, state, newObj))
-    }
-    
+  function setValue(newObj) {
+    setState(Object.assign({}, state, newObj))
+  }
 
-    return [state, setValue]
+
+  return [state, setValue]
 }
 
 // export default function useSetState2() {
-    
-    
+
+
 
 
 //     const [state, setValue] = JUseState({
@@ -67,3 +71,12 @@ function JUseState(initialState) {
 //         </div>
 //     );
 // };
+
+
+
+
+const Com1 = React.memo(function Com1(props) {
+  return <button type="button" onClick={() => props.setState({ hello: 'world' })}>
+    set hello
+  </button>
+})
