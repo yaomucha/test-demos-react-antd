@@ -25,6 +25,8 @@ function App() {
   //     { flex: 1, background: 'hsl(50deg 100% 60%)' },
   //   ];
   // }, [boxWidth]);   //不会重新渲染Boxes.js
+
+  // 使用useMemo后的boxes不是一个函数,就是一个他里面return的值
   
   return (
     <>
