@@ -1,21 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Web site created using create-react-app" />
+  <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+  <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+  <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
       Only files inside the `public` folder can be referenced from the HTML.
@@ -24,12 +22,68 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
+  <title>React App</title>
+  <script type="text/javascript">
+    var caution = false
+    function setCookie(name, value, expires, path, domain, secure) {
+      var curCookie = name + "=" + escape(value) +
+        ((expires) ? ";expires=" + expires.toGMTString() : "") +
+        ((path) ? "; path=" + path : "") +
+        ((domain) ? "; domain=" + domain : "") +
+        ((secure) ? ";secure" : "")
+      if (!caution || (name + "=" + escape(value)).length <= 4000) {
+        document.cookie = curCookie
+      }
+      else if (confirm("Cookie exceeds 4KB and will be cut!")) {
+        document.cookie = curCookie
+      }
+    }
+    function getCookie(name) {
+      var prefix = name + "="
+      var cookieStartIndex = document.cookie.indexOf(prefix)
+      if (cookieStartIndex == -1) {
+        return null
+      }
+      var cookieEndIndex = document.cookie.indexOf(";", cookieStartIndex + prefix.length)
+      if (cookieEndIndex == -1) {
+        cookieEndIndex = document.cookie.length
+      }
+      return unescape(document.cookie.substring(cookieStartIndex + prefix.length, cookieEndIndex))
+    }
+    function deleteCookie(name, path, domain) {
+      if (getCookie(name)) {
+        document.cookie = name + "=" +
+          ((path) ? "; path=" + path : "") +
+          ((domain) ? "; domain=" + domain : "") +
+          "; expires=Thu, 01-Jan-70 00:00:01 GMT"
+      }
+    }
+    function fixDate(date) {
+      var base = new Date(0)
+      var skew = base.getTime()
+      if (skew > 0) {
+        date.setTime(date.getTime() - skew)
+      }
+    }
+    var now = new Date()
+    fixDate(now)
+    now.setTime(now.getTime() + 365 * 24 * 60 * 60 * 1000)
+    var visits = getCookie("counter")
+    if (!visits) {
+      visits = 1;
+    }
+    else {
+      visits = parseInt(visits) + 1;
+    }
+    setCookie("counter", visits, now)
+    document.write("您是到访的第" + visits + "位用户！")
+  </script>
+</head>
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+  <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
 
@@ -39,5 +93,6 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-  </body>
+</body>
+
 </html>
