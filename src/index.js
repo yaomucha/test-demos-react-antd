@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import Demo from './react-custom-hooks/useSetState/demo/demo2';
+import Demo from './component/button/demo/demo1';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
