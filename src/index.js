@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import Demo from './component/button/demo/demo1';
+import Demo from './react-custom-hooks/useLoadingDelay/demo/demo1';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
