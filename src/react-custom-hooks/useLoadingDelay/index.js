@@ -1,34 +1,32 @@
 import { useEffect } from "react"
-import { useState,useRef } from "react"
+import { useState, useRef } from "react"
 
 
-// TODO: 未完成
-export default function useLoadingDelay(api, loadingDelay) {
-    const [loading, setLoading] = useState(false)
+// 参考文档：https://www.telerik.com/blogs/how-to-create-custom-debounce-hook-react
+export default function useLoadingDelay(api, delayTime) {
+
     const [data, setData] = useState()
-    const timerRef = useRef()
 
     useEffect(() => {
-        if(data){
-            timerRef.current = setTimeout(() => {
-                setLoading(true)
-            }, loadingDelay)
-        
         
             api()
                 .then(res => {
-                    if (timerRef.current) {
-                        setLoading(false)
-                        // setData(res)
-                        clearTimeout(timerRef.current)
-                    }
+                    setData(res)
+                    setLoading(false)
+                    clearTimeout(timer)
                 })
-        
-        }
-    }, [data])
 
-    
-    
+
+        let timer = setTimeout(() => {
+            setLoading(true)
+        }, delayTime)
+
+    }, [])
+
+    // 接口在delay时间内没返回，就显示loading，不然就不显示
+    const [loading, setLoading] = useState(false)
+
+
 
     return [loading, data]
 }
